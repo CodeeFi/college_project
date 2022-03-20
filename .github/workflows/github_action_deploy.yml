@@ -18,7 +18,17 @@ jobs:
       - name: Deploy to Server 1
         uses: easingthemes/ssh-deploy@main
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
           TARGET: ${{ secrets.TARGET_DIR }}
+
+      # - name: executing remote ssh commands using password
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.HOST }}
+      #     
+      #     password: ${{ secrets.PASSWORD }}
+      #     port: ${{ secrets.PORT }}
+      #     script: whoami
