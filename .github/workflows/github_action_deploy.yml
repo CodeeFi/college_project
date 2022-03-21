@@ -21,7 +21,6 @@ jobs:
           TARGET: ${{ secrets.TARGET_DIR }}
           PASSWORD: ${{secrets.password}}
         run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ssh -i ${REMOTE_USER}@${REMOTE_HOST}' -y
             ${PASSWORD}
           
