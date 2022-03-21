@@ -21,7 +21,7 @@ jobs:
           TARGET: ${{ secrets.TARGET_DIR }}
           PASSWORD: ${{secrets.password}}
         run: |
-          ssh -i ${REMOTE_USER}@${REMOTE_HOST}' -y
+          ssh ${REMOTE_USER}@${REMOTE_HOST} -y
             ${PASSWORD}
           
             #Now we have got the access of EC2 and we will start the deploy .
