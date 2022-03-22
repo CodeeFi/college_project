@@ -14,7 +14,9 @@ jobs:
     steps:
       - name: Checkout the files
         uses: actions/checkout@v2
-          echo hello
+      - name: run the command  
+        run: echo "This step will be skipped on Monday and Wednesday"
+        
 #       - name: Deploy to  Ec2 Server 1
 #         uses: easingthemes/ssh-deploy@main
 #         env:
