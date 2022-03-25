@@ -14,5 +14,6 @@ jobs:
     - name: Run App
       run: |
           ls
+          pm2 stop 0
           pm2 start npm --name "collegeProject API" -- run start
 
