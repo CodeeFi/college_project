@@ -1,3 +1,5 @@
+
+
 name: Push-to-EC2
 
 on:
@@ -5,18 +7,16 @@ on:
     branches:
       - master
 
-  jobs:
-    build:
-      runs-on: self-hosted
-
-
-      steps:
-      - name: Checkout the Code on Git Remp.
-      - uses: actions/checkout@v2
-      - name: Install npm dependencies
-        run: npm install
-      - name: Run App
-        run: |
-            ls
-            pm2 stop 0
-            pm2 start 0
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+    - name: Checkout the Code on Git Remp.
+    - uses: actions/checkout@v2
+    - name: Install npm dependencies
+      run: npm install
+    - name: Run App
+      run: |
+          ls
+          pm2 stop 0
+          pm2 start 0
