@@ -14,4 +14,3 @@ jobs:
     - name: Run App
       run: |
           ls
-          npm start
