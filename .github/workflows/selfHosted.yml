@@ -14,5 +14,4 @@ jobs:
     - name: Run App
       run: |
           ls
-          cd college_project
           npm start
