@@ -5,7 +5,7 @@
 
 const home = (req, res, next) => {
 
-    res.send("This is home page. This is a testing page")
+
 
 }
 
