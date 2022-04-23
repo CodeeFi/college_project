@@ -5,7 +5,7 @@ let validate = (email, password, repassword) => {
     const validEmail = validator.isEmail(email);
     const pass = validator.equals(password, repassword);
     const StrongPass = validator.isStrongPassword(password);
-    console.log(validEmail, pass, StrongPass)
+    // console.log(validEmail, pass, StrongPass)
     if (validEmail && pass && StrongPass)
         return true;
 
