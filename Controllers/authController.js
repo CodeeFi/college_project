@@ -90,10 +90,16 @@ const register = async (req, res, next) => {
 
 
 const adminLogin = async (req, res, next) => {
-    res.send("Admin Login");
+    res.status(200).json({
+        status: 200,
+        msg: "login sucessfull"
+    })
 }
 const adminRegister = async (req, res, next) => {
-    res.send("Admin Register");
+    res.status(200).json({
+        status: 200,
+        msg: "Registration sucessfull"
+    })
 }
 
 
