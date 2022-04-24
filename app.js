@@ -5,11 +5,14 @@ const app = express();
 const port = process.env.PORT || 5000;
 const routes = require("./Routes/auth");
 const errorsHandler = require("./Middleware/errorHandler");
-
+const cors = require("cors")
 
 
 app.use(express.json());
 
+app.use(cors({
+    origin: ["https://subharti.ml", "http://localhost:3000"]
+}))
 
 
 // Main Routes.
