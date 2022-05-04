@@ -5,7 +5,7 @@
 
 const home = (req, res, next) => {
 
-
+    res.send("hello app");
 
 }
 
