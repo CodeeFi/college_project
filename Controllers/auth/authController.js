@@ -1,11 +1,11 @@
-const pwdHash = require("../Middleware/pwdHash");
-const { customError } = require("../errors/errors")
-const Student = require("../Models/auth/student");
-const { passwordVerify } = require("../Middleware/pwdHash");
-const { Validator } = require("../Middleware/validator");
+// const pwdHash = require("../Middleware/pwdHash");
+const { customError } = require("../../errors/errors")
+const Student = require("../../Models/auth/student");
+const { passwordVerify } = require("../../Middleware/pwdHash");
+// const { Validator } = require("../Middleware/validator");
 const validator = require("validator");
-const { createToken } = require("../Middleware/auth");
-const Admin = require("../Models/auth/admin");
+const { createToken } = require("../../Middleware/auth");
+const Admin = require("../../Models/auth/admin");
 
 const login = async (req, res, next) => {
 
@@ -59,7 +59,6 @@ const login = async (req, res, next) => {
 
 //Regisgter the Students.
 const register = async (req, res, next) => {
-
     try {
         // Find the user by email or enrolment no
         const { enrolment_no, email } = req.body;
@@ -90,9 +89,6 @@ const register = async (req, res, next) => {
     }
 
 }
-
-
-
 
 //  Admin Login
 const adminLogin = async (req, res, next) => {
@@ -131,10 +127,6 @@ const adminLogin = async (req, res, next) => {
             "msg": "SomeThing went Wrong"
         });
     }
-
-
-
-
 }
 
 // Admin Registration.
@@ -160,9 +152,6 @@ const adminRegister = async (req, res, next) => {
         return next(customError("Bad Request", 400));
     }
 }
-
-
-
 
 
 module.exports = {

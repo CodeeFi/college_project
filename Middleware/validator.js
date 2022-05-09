@@ -62,7 +62,6 @@ function AdminValidator(req, res, next) {
 
 
 
-
 module.exports = {
     Validator,
     AdminValidator,
