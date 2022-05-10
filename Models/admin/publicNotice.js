@@ -17,7 +17,7 @@ const publicNotice = mongoose.Schema({
     noticeDate: {
         type: Date,
         require: true,
-        default: new Date().getDate()
+        default: new Date()
     },
     noticeImg: {
         type: String
@@ -32,12 +32,10 @@ const publicNotice = mongoose.Schema({
     },
     verified: {
         type: Boolean,
-        require: true,
         default: false
     },
     publish: {
         type: Boolean,
-        require: true,
         default: false
     }
 
