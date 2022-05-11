@@ -9,6 +9,7 @@ function wrapper(fn) {
         } catch (error) {
             next(customError("SomeThing Went wrong", 500));
             console.log(error)
+            console.log("Error Happne");
         }
     }
 

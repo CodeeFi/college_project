@@ -24,6 +24,8 @@ const {
 } = require("../Controllers/Admin/studentInfo");
 
 
+const { getQuery, showQuery, reply } = require("../Controllers/Admin/studentQuery");
+
 // const { resultSection } = require("../Controllers/Admin/resultSection")
 
 
@@ -56,8 +58,9 @@ Router.route("/setNotice").post(userauth, setNotice);
 Router.route("/deleteNotice").post(userauth, setNotice);
 
 
-// Router.route("/listQuery").get(userauth, studentQuery);
-// Router.route("/viewQuery/:id").get(userauth, studentQuery);
+Router.route("/getQuery").get(userauth, getQuery);
+Router.route("/showQuery/:id").get(userauth, showQuery);
+Router.route("/reply").put(userauth, reply);
 
 
 // //Routes for admin
@@ -69,8 +72,6 @@ Router.route("/setCources").post(userauth, setCollege).put(userauth, setCource).
 Router.route("/collegeList").get(userauth, getCollege);
 
 Router.route("/getCourse/:id").get(userauth, getCourse);
-
-
 
 
 

@@ -23,6 +23,11 @@ const result = mongoose.Schema({
         require: true,
         default: new Date().toDateString()
     },
+    semester: {
+        type: Number,
+        require: true,
+        trim: true
+    },
     type: {
         type: String,
         require: true,

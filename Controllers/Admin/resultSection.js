@@ -2,7 +2,7 @@ require("dotenv").config;
 const s3 = require("../../aws/awsConfig")
 const fs = require("fs");
 const wrapper = require("../../Middleware/wrapper");
-const customError = require("../../errors/errors");
+const { customError } = require("../../errors/errors");
 const Result = require("../../Models/admin/resultUpload");
 const path = require("path");
 const { wrap } = require("module");
@@ -89,9 +89,9 @@ async function DownloadFile(Key, id) {
 ///  MiddleFunction which call when user is send the request.
 const uploadResult = wrapper(async (req, res, next) => {
 
-    const { title, sessionStartYear, sessionEndYear, type, fileUrl } = req.body;
+    const { title, sessionStartYear, sessionEndYear, type, fileUrl, semester } = req.body;
 
-    if (!title || !sessionEndYear || !sessionStartYear || !type || !fileUrl) {
+    if (!title || !sessionEndYear || !sessionStartYear || !type || !fileUrl || !semester) {
         return next(customError("SomeThing Went Wrong ", 400));
     }
 
@@ -167,12 +167,23 @@ const RemoveResult = wrapper(async (req, res, next) => {
         next(customError("SomeThing Went Wrong", 400));
 
     const remove = await Result.findOneAndDelete({ _id: id }, { publish: true });
-
-    if (remove)
+    console.log(remove);
+    if (remove) {
+        const { fileUrl } = remove;
+        // console.log(fileUrl);
+        // try {
+        //     // await s3.deleteObject({ Bucket: process.env.AWS_BUCKET_NAME, Key: fileUrl }).promise();
+        // } catch (error) {
+        //     console.log(error);
+        //     next(customError("SomeThing Went Wrong", 500));
+        // }
         return res.status(200).json({
             status: 200,
             msg: "Result Deleted Sucessfull"
         });
+    }
+
+
 
     next(customError("SomeThing Went Wrong", 500));
 

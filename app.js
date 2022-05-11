@@ -19,7 +19,8 @@ app.use(cors({
 // Main Routes.
 app.use("/api/v0/auth", authRoutes);
 app.use("/api/v0/admin", adminRoute);
-// app.use("/api/v0/home", homeRoute);
+// Home Router
+app.use("/api/v0/home", homeRoute);
 
 
 
