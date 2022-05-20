@@ -37,4 +37,32 @@ function Validator(req, res, next) {
     else if (!valid.StrongPass)
         next(customError("Your Passowrd is not Strong", 500));
 }
-module.exports = Validator;
+
+
+function AdminValidator(req, res, next) {
+
+    const { firstName, lastName, email, password, rePassword, adminType } = req.body;
+    if (!firstName || !lastName || !email || !password || !rePassword || !adminType) {
+        next(customError("Somthing Went Wrong", 500));
+        return false;
+    }
+    let valid = validate(email, password, rePassword);
+    if (valid) {
+        return next();
+    }
+    else if (!valid.validEmail)
+        next(customError("Please check Your Email its not valid", 500));
+    else if (!valid.pass)
+        next(customError("Your Password is not match.", 500));
+    else if (!valid.StrongPass)
+        next(customError("Your Passowrd is not Strong", 500));
+
+}
+
+
+
+
+module.exports = {
+    Validator,
+    AdminValidator,
+} 

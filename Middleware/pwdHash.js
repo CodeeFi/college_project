@@ -6,6 +6,8 @@ const pwdHash = async function (next) {
 
     this.password = await bcrypt.hash(this.password, 10);
     this.repassword = this.password;
+    if (this.rePassword)
+        this.rePassword = this.password;
     next();
 }
 
