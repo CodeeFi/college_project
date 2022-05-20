@@ -29,7 +29,8 @@ const studenQuerySchema = mongoose.Schema({
     },
     reply: {
         type: String,
-        trim: true
+        trim: true,
+        default: false
     },
     visiblity: {
         type: Boolean,

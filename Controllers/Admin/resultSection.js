@@ -131,6 +131,7 @@ const resultList = wrapper(async (req, res, next) => {
         sessionStartYear: 1,
         sessionEndYear: 1,
         type: 1,
+        publish: 1,
     });
 
     if (result)

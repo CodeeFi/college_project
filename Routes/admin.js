@@ -7,7 +7,9 @@ const {
     setCource,
     getCollege,
     removeCourse,
-    getCourse
+    getCourse,
+    teacherList,
+    deleteTeacher
 } = require("../Controllers/Admin/setting");
 
 const { uploadResult, resultList, publishResult, RemoveResult } = require("../Controllers/Admin/resultSection");
@@ -19,7 +21,8 @@ const {
     studentsContect,
     studentsApprove,
     studentsApproved,
-    studentsDelete
+    studentsDelete,
+    approvedStudent
 
 } = require("../Controllers/Admin/studentInfo");
 
@@ -42,6 +45,7 @@ Router.route("/studentsContect/:limit/:offset").get(userauth, studentsContect);
 Router.route("/studentsContect/:limit").get(userauth, studentsContect);
 
 Router.route("/studentsApprove").get(userauth, studentsApprove).put(userauth, studentsApproved).delete(userauth, studentsDelete);
+Router.route("/approvedStudent").get(userauth, approvedStudent);
 
 
 
@@ -66,6 +70,8 @@ Router.route("/reply").put(userauth, reply);
 // //Routes for admin
 // Router.route("/getProfile").post(userauth, profile);
 Router.route("/setTeacher").post(userauth, teacherProfile);
+Router.route("/teacherList").get(userauth, teacherList);
+Router.route("/deleteTeacher").delete(userauth, deleteTeacher);
 Router.route("/uploadFile").post(userauth, uploadfile);
 
 Router.route("/setCources").post(userauth, setCollege).put(userauth, setCource).delete(userauth, removeCourse);

@@ -32,7 +32,7 @@ const studentsInfo = wrapper(async (req, res, next) => {
         last_name: 1,
         course: 1,
         approved: 1
-    }).skip(offset).limit(limit);
+    }).sort({ _id: -1 }).skip(offset).limit(limit);
 
     if (studentInfo)
         return res.status(200).json({
@@ -84,6 +84,24 @@ const studentsApprove = wrapper(async (req, res, next) => {
     next(customError("something went wrong", 400))
 });
 
+const approvedStudent = wrapper(async (req, res, next) => {
+    const approvleList = await Student.find({ approved: true }, {
+        enrolment_no: 1,
+        first_name: 1,
+        last_name: 1,
+        course: 1,
+        approved: 1
+    });
+
+
+    if (approvleList)
+        return res.status(200).json({
+            approvleList,
+        })
+
+    next(customError("something went wrong", 400))
+});
+
 // Find by id and change the approved status true;
 const studentsApproved = wrapper(async (req, res, next) => {
     const { id } = req.body;
@@ -117,5 +135,6 @@ module.exports = {
     studentsContect,
     studentsApprove,
     studentsApproved,
-    studentsDelete
+    studentsDelete,
+    approvedStudent
 }

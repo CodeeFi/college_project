@@ -5,18 +5,17 @@ const Query = require("../../Models/home/studentQuery");
 
 const getQuery = wrapper(async (req, res, next) => {
 
-    const queryList = await Query.find({ visiblity: false }, {
+    const queryList = await Query.find({ reply: false }, {
         name: 1,
         email: 1,
-        subject: 1
-    });
+        subject: 1,
+        message: 1
+    }).sort({ id: -1 }).limit(4);
 
     if (queryList)
         return res.status(200).json(queryList)
 
     next(customError("No Query Avliable", 404));
-
-
 })
 
 

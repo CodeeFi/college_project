@@ -95,6 +95,8 @@ const adminLogin = async (req, res, next) => {
 
     try {
         const { email, password } = req.body;
+        if (!email || !password)
+            throw new Error("SomeThing Went Wrong");
         const token = createToken(email);
         const admin = await Admin.findOne({ email }, {
             firstName: 1,
@@ -106,14 +108,20 @@ const adminLogin = async (req, res, next) => {
             isApproved: 1
         });
 
+        // if (admin.isApproved != true) {
+        //     next(customError("Sorry Your Registration is not Approved", 403));
+        //     return false;
+        // }
+
         const adminVerify = await passwordVerify(password, admin);
         if (adminVerify) {
-            const { id, email, firstName, lastName, session: [{ secret }] } = admin
+            const { id, email, firstName, lastName, adminType, session: [{ secret }] } = admin
             return res.status(200).json({
                 id,
                 email,
                 firstName,
                 lastName,
+                adminType,
                 refreshToken: secret,
                 token: token
             });

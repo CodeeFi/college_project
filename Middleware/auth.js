@@ -18,7 +18,7 @@ const userauth = (req, res, next) => {
 function createToken(data = 0) {
     try {
         if (data) {
-            return jwt.sign({ id: data }, process.env.Secret, { expiresIn: "10h" });
+            return jwt.sign({ id: data }, process.env.Secret, { expiresIn: "60d" });
         }
         const secret = jwt.sign({ id: this._id }, process.env.Secret);
         this.session.push({ secret });

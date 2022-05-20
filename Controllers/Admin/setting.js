@@ -25,6 +25,41 @@ const teacherProfile = wrapper(async (req, res, next) => {
 });
 
 
+const teacherList = wrapper(async (req, res, next) => {
+    const profileList = await TProfile.find({}, {
+        fullName: 1,
+        designation: 1,
+        email: 1,
+        phone: 1
+    });
+    if (profileList[0]) {
+        return res.status(200).json(profileList);
+    } else {
+        next(customError("No Reoord Found", 400))
+    }
+    next(customError("SomeThing Went Wrong", 500))
+});
+
+
+
+const deleteTeacher = wrapper(async (req, res, next) => {
+    const { id } = req.body;
+    if (!id) {
+        next(customError("Bad Request", 409))
+    }
+    const deleted = await TProfile.findByIdAndDelete({ _id: id })
+    if (deleted) {
+        return res.status(200).json({
+            status: 200,
+            msg: "Record Deleted Successfull"
+        });
+    } else {
+        next(customError("No Reoord Found", 400))
+    }
+    next(customError("SomeThing Went Wrong", 500))
+})
+
+
 
 
 // Set Colleges And Courses..
@@ -133,5 +168,7 @@ module.exports = {
     setCource,
     getCollege,
     removeCourse,
-    getCourse
+    getCourse,
+    teacherList,
+    deleteTeacher
 }
