@@ -41,8 +41,8 @@ function Validator(req, res, next) {
 
 function AdminValidator(req, res, next) {
 
-    const { firstName, lastName, email, password, rePassword, adminType } = req.body;
-    if (!firstName || !lastName || !email || !password || !rePassword || !adminType) {
+    const { firstName, lastName, email, password, rePassword } = req.body;
+    if (!firstName || !lastName || !email || !password || !rePassword) {
         next(customError("Somthing Went Wrong", 500));
         return false;
     }

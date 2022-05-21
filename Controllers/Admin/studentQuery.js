@@ -24,12 +24,13 @@ const showQuery = wrapper(async (req, res, next) => {
     const { id } = req.params;
     if (!id)
         next(customError("Bad Request", 400))
-    const message = await Query.findById({ _id: id }, {
-        message: 1
-    });
-    if (message) {
-        await Query.findOneAndUpdate({ _id: id }, { visiblity: true });
-        return res.status(200).json(message);
+    const seen = await Query.findOneAndUpdate({ _id: id }, { visiblity: true });
+
+    if (seen) {
+        return res.status(200).json({
+            status: 200,
+            msg: "Query Seen"
+        });
     }
     next(customError("SomeThing Went Wrong", 500));
 

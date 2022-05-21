@@ -147,7 +147,7 @@ const adminRegister = async (req, res, next) => {
             return res.status(409).json({
                 status: 409,
                 msg: "user already exist"
-            })
+            });
         }
 
         await Admin.create(req.body);

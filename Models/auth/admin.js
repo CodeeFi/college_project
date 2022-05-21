@@ -37,6 +37,10 @@ const Adminschema = mongoose.Schema({
         type: Boolean,
         require: true
     },
+    imgUrl: {
+        type: String,
+        trim: true
+    },
     isApproved: {
         type: Boolean,
         default: false,

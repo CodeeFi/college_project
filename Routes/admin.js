@@ -26,6 +26,12 @@ const {
 
 } = require("../Controllers/Admin/studentInfo");
 
+const {
+    adminList,
+    adminDelete,
+    adminApprove,
+    profileImg
+} = require("../Controllers/Admin/profile");
 
 const { getQuery, showQuery, reply } = require("../Controllers/Admin/studentQuery");
 
@@ -73,6 +79,10 @@ Router.route("/setTeacher").post(userauth, teacherProfile);
 Router.route("/teacherList").get(userauth, teacherList);
 Router.route("/deleteTeacher").delete(userauth, deleteTeacher);
 Router.route("/uploadFile").post(userauth, uploadfile);
+
+Router.route("/adminList").get(userauth, adminList).delete(userauth, adminDelete).put(userauth, adminApprove);
+Router.route("/profileImg").put(userauth, profileImg);
+
 
 Router.route("/setCources").post(userauth, setCollege).put(userauth, setCource).delete(userauth, removeCourse);
 Router.route("/collegeList").get(userauth, getCollege);

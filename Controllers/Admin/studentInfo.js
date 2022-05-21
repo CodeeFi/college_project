@@ -1,19 +1,21 @@
 
 // Route -> localhost:5000/api/v0/admin/students  
-const wrapper = require("../../Middleware/wrapper")
+const wrapper = require("../../Middleware/wrapper");
 const Student = require("../../Models/auth/student");
-const { customError } = require("../../errors/errors")
-
+const { customError } = require("../../errors/errors");
+const Query = require("../../Models/home/studentQuery");
 // In Student section send the responce and send the data total student and approved students
 const student = wrapper(async (req, res, next) => {
 
     const totalStudents = await Student.find({}).count();
     const approvedStudent = await Student.find({ approved: true }).count();
+    const totalQuery = await Query.find({ visiblity: false }).count();
 
-    if (totalStudents || approvedStudent)
+    if (totalStudents || approvedStudent || totalQuery)
         return res.status(200).json({
             totalStudents,
-            approvedStudent
+            approvedStudent,
+            totalQuery
         });
     next(customError("something went wrong", 400))
 });
