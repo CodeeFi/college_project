@@ -98,14 +98,15 @@ const adminLogin = async (req, res, next) => {
         if (!email || !password)
             throw new Error("SomeThing Went Wrong");
         const token = createToken(email);
-        const admin = await Admin.findOne({ email }, {
+        const admin = await Admin.findOne({ email, isApproved: true }, {
             firstName: 1,
             lastName: 1,
             email: 1,
             password: 1,
             session: 1,
             adminType: 1,
-            isApproved: 1
+            isApproved: 1,
+            imgUrl: 1
         });
 
         // if (admin.isApproved != true) {
@@ -115,7 +116,7 @@ const adminLogin = async (req, res, next) => {
 
         const adminVerify = await passwordVerify(password, admin);
         if (adminVerify) {
-            const { id, email, firstName, lastName, adminType, session: [{ secret }] } = admin
+            const { id, email, firstName, lastName, imgUrl, adminType, session: [{ secret }] } = admin
             return res.status(200).json({
                 id,
                 email,
@@ -123,7 +124,8 @@ const adminLogin = async (req, res, next) => {
                 lastName,
                 adminType,
                 refreshToken: secret,
-                token: token
+                token: token,
+                imgUrl
             });
         }
         else {

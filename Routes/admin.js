@@ -30,7 +30,8 @@ const {
     adminList,
     adminDelete,
     adminApprove,
-    profileImg
+    profileImg,
+    getProfile
 } = require("../Controllers/Admin/profile");
 
 const { getQuery, showQuery, reply } = require("../Controllers/Admin/studentQuery");
@@ -80,6 +81,7 @@ Router.route("/teacherList").get(userauth, teacherList);
 Router.route("/deleteTeacher").delete(userauth, deleteTeacher);
 Router.route("/uploadFile").post(userauth, uploadfile);
 
+Router.route("/getProfile/:id").get(userauth, getProfile);
 Router.route("/adminList").get(userauth, adminList).delete(userauth, adminDelete).put(userauth, adminApprove);
 Router.route("/profileImg").put(userauth, profileImg);
 

@@ -68,6 +68,24 @@ const profileImg = wrapper(async (req, res, next) => {
 });
 
 
+const getProfile = wrapper(async (req, res, next) => {
+    const { id } = req.params;
+
+    if (!id) {
+        next(customError("Bad Request", 500));
+    }
+    const profile = await Admin.findOne({ _id: id }, {
+        firstName: 1,
+        lastName: 1,
+        email: 1,
+        imgUrl: 1,
+        adminType: 1
+    });
+    if (profile) {
+        return res.status(200).json(profile);
+    }
+    next(customError("SomeThing Went Wrong", 500));
+})
 
 
 
@@ -75,5 +93,6 @@ module.exports = {
     adminList,
     adminDelete,
     adminApprove,
-    profileImg
+    profileImg,
+    getProfile
 }
