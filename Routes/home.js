@@ -2,6 +2,7 @@ const express = require("express");
 const Router = express.Router();
 const { home } = require("../Controllers/home/home");
 const { userauth } = require("../Middleware/auth");
+const { getCollege, getCourse } = require("../Controllers/Admin/setting");
 
 // MiddleWare Funcion import.
 const { teacherList } = require("../Controllers/home/teacherList");
@@ -29,6 +30,9 @@ Router.route("/getReply/:id").get(userauth, getQuery);
 
 
 Router.route("/findResult").post(userauth, findResult);
+
+Router.route("/collegeList").get(getCollege);
+Router.route("/getCourse/:id").get(getCourse);
 
 // Router.route("/queryStatus/:id").get(userauth, home);
 
