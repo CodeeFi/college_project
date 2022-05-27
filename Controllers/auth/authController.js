@@ -11,11 +11,15 @@ const login = async (req, res, next) => {
 
     try {
         const { userid, password } = req.body;
+        if (!userid && !password) {
+            next(customError("Bad Request", 400));
+        }
         const token = createToken(userid);
         let std;
         if (validator.isEmail(userid)) {
-            std = await Student.findOne({ email: userid },
+            std = await Student.findOne({ email: userid, approved: true },
                 {
+                    enrolment_no: 1,
                     first_name: 1,
                     last_name: 1,
                     email: 1,
@@ -23,7 +27,8 @@ const login = async (req, res, next) => {
                     session: 1
                 })
         } else {
-            std = await Student.findOne({ enrolment_no: userid }, {
+            std = await Student.findOne({ enrolment_no: userid, approved: true }, {
+                enrolment_no: 1,
                 first_name: 1,
                 last_name: 1,
                 email: 1,
@@ -33,10 +38,11 @@ const login = async (req, res, next) => {
         }
         const user_verify = await passwordVerify(password, std);
         if (user_verify) {
-            const { id, email, first_name, last_name, session: [{ secret }] } = std
+            const { id, email, first_name, enrolment_no, last_name, session: [{ secret }] } = std
             return res.status(200).json({
                 id,
                 email,
+                enrolment_no,
                 first_name,
                 last_name,
                 refreshToken: secret,

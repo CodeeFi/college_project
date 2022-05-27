@@ -9,6 +9,8 @@ const { teacherList } = require("../Controllers/home/teacherList");
 const { studentQuery, getQuery, queryList } = require("../Controllers/home/studentQuery");
 const { ResponseFile } = require("../Controllers/home/ResponceFile");
 
+const { NoticeList, notice } = require("../Controllers/home/notice");
+
 const { findResult } = require("../Controllers/home/findResult");
 
 
@@ -39,13 +41,9 @@ Router.route("/getCourse/:id").get(getCourse);
 
 
 // // Notic Section
-// Router.route("/noticList").get(userauth, home);
-// Router.route("/notice/:id").get(userauth, home);
-
-
-// // Student send Query.
-// Router.route("/submitQuery").post(userauth, home);
-
+Router.route("/noticList").get(NoticeList);
+Router.route("/noticList/:limit").get(NoticeList);
+Router.route("/notice/:id").get(notice);
 
 
 module.exports = Router;
